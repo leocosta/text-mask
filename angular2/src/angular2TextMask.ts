@@ -36,7 +36,9 @@ export default class MaskedInputDirective implements OnInit, ControlValueAccesso
       this.inputElement = this.element.nativeElement
     } else {
       // `textMask` directive is used on an abstracted input element, `ion-input`, `md-input`, etc
-      this.inputElement = this.element.nativeElement.getElementsByTagName('INPUT')[0]
+      setTimeout(() => {
+        this.inputElement = this.element.nativeElement.getElementsByTagName('INPUT')[0]
+      }, 0)
     }
 
     this.textMaskInputElement = createTextMaskInputElement(
