@@ -31,19 +31,20 @@ export default class MaskedInputDirective implements OnInit, ControlValueAccesso
   constructor(private element: ElementRef) {}
 
   ngOnInit() {
-    if (this.element.nativeElement.tagName === 'INPUT') {
+    if (this.element.nativeElement.tagName.toUpperCase() === 'INPUT') {
       // `textMask` directive is used directly on an input element
       this.inputElement = this.element.nativeElement
     } else {
       // `textMask` directive is used on an abstracted input element, `ion-input`, `md-input`, etc
-      setTimeout(() => {
+      if (typeof this.element.nativeElement.getElementsByTagName === 'function')
         this.inputElement = this.element.nativeElement.getElementsByTagName('INPUT')[0]
-      }, 0)
     }
-
-    this.textMaskInputElement = createTextMaskInputElement(
-      Object.assign({inputElement: this.inputElement}, this.textMaskConfig)
-    )
+    setTimeout(() => {
+      this.textMaskInputElement = createTextMaskInputElement(
+        Object.assign({inputElement: this.inputElement}, this.textMaskConfig)
+      )
+      this.onInput()
+    }, 3000)
   }
 
   writeValue(value: any) {
