@@ -44,7 +44,7 @@ export default class MaskedInputDirective implements OnInit, ControlValueAccesso
         Object.assign({inputElement: this.inputElement}, this.textMaskConfig)
       )
       this.onInput()
-    }, 3000)
+    })
   }
 
   writeValue(value: any) {
